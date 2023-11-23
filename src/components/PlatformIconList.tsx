@@ -40,22 +40,19 @@ const PlatformIconList = ({ platforms }: Props) => {
         const slug = platform.slug;
         const iconName = getFirstWord(slug);
 
-        // Check if the icon name and platform slug are not in their respective sets
         if (!uniqueIcons.has(iconName) && !uniquePlatforms.has(slug)) {
           uniqueIcons.add(iconName);
           uniquePlatforms.add(slug);
 
           return (
             <Icon
-              key={slug} // Make sure to include a unique key for each rendered icon
+              key={platform.id}
               as={iconMap[iconName]}
               title={slug}
               color="gray.500"
             />
           );
         }
-
-        return null; // Render nothing if the icon or platform slug has already been rendered
       })}
     </HStack>
   );
