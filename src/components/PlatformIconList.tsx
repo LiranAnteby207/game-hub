@@ -31,15 +31,32 @@ const PlatformIconList = ({ platforms }: Props) => {
     ios: MdPhoneIphone,
     web: BsGlobe,
   };
+  const uniquePlatforms = new Set();
+  const uniqueIcons = new Set();
+
   return (
     <HStack marginY={1}>
-      {platforms.map((platform) => (
-        <Icon
-          as={iconMap[getFirstWord(platform.slug)]}
-          title={platform.slug}
-          color="gray.500"
-        />
-      ))}
+      {platforms.map((platform) => {
+        const slug = platform.slug;
+        const iconName = getFirstWord(slug);
+
+        // Check if the icon name and platform slug are not in their respective sets
+        if (!uniqueIcons.has(iconName) && !uniquePlatforms.has(slug)) {
+          uniqueIcons.add(iconName);
+          uniquePlatforms.add(slug);
+
+          return (
+            <Icon
+              key={slug} // Make sure to include a unique key for each rendered icon
+              as={iconMap[iconName]}
+              title={slug}
+              color="gray.500"
+            />
+          );
+        }
+
+        return null; // Render nothing if the icon or platform slug has already been rendered
+      })}
     </HStack>
   );
 };
