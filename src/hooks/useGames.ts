@@ -15,6 +15,7 @@ export interface Game {
     platforms: {
       platform: Platform;
     }[];
+    metacritic: number;
   }
   
   interface FetchGamesRes {
