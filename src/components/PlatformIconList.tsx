@@ -40,6 +40,7 @@ const PlatformIconList = ({ platforms }: Props) => {
         const slug = platform.slug;
         const iconName = getFirstWord(slug);
 
+        // Check if the icon name and platform slug are not in their respective sets
         if (!uniqueIcons.has(iconName) && !uniquePlatforms.has(slug)) {
           uniqueIcons.add(iconName);
           uniquePlatforms.add(slug);
